@@ -4,6 +4,8 @@
     <img width="33%" src="./src/assets/img/quiz-app.gif">
 </div>
 
+> Open Trivia API를 이용한 퀴즈 앱 만들기
+
 ## 주소
 
 - 사이트: https://adc0612-quizapp.netlify.app/
@@ -32,6 +34,7 @@
 - [x] 정 오답에 대한 비율을 차트로 표기
 - [x] 다시 풀기
 - [x] 오답 노트
+- [ ] 컴포넌트 테스트
 
 ## 사용된 기술스택
 
@@ -42,3 +45,4 @@
 - MUI (UI 구성)
 - Chart.js (차트 구성)
 - moment (시간 계산)
+- localStorage (퀴즈 기록 저장)
