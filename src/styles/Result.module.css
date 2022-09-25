@@ -1,0 +1,10 @@
+.flex_box {
+  display: flex;
+  justify-content: space-between;
+}
+.info_box {
+  margin-top: 12px;
+}
+.info_box > p {
+  margin: 4px 0;
+}

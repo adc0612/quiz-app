@@ -83,10 +83,6 @@ const Question = () => {
     } else {
       const endTime = moment();
       const duration = moment.duration(endTime.diff(startTime));
-      // let durationStr = '';
-      // if (duration.hours() > 0) durationStr += `${duration.hours()}시간 `;
-      // if (duration.minutes() > 0) durationStr += `${duration.minutes()}분 `;
-      // durationStr += `${duration.seconds()}초`;
       setElapsedTime(`${duration.hours().toString().padStart(2, '0')}:${duration.minutes().toString().padStart(2, '0')}:${duration.seconds().toString().padStart(2, '0')}`);
       navigate('/result');
     }
