@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router';
 import { useCategory } from '../hooks/query';
 
 const Home = () => {
-  // const { isLoading, data, isError, error } = useQuery(['category-dat'], () => getCategory());
   const { isLoading, data, isError, error } = useCategory();
   const [options, setOptions] = useRecoilState(optionsState);
   const navigate = useNavigate();
@@ -47,7 +46,7 @@ const Home = () => {
   ];
 
   return (
-    <div>
+    <Box>
       <Typography variant='h3' fontWeight='bold'>
         퀴즈 타임!!
       </Typography>
@@ -62,7 +61,7 @@ const Home = () => {
           </Button>
         </Box>
       </form>
-    </div>
+    </Box>
   );
 };
 

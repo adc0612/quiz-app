@@ -10,6 +10,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner';
 import { useQuestions } from '../hooks/query';
 import styles from '../styles/Question.module.css';
 import { useNavigate } from 'react-router';
+import { STORAGE_KEY } from '../utils/storage';
 
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
@@ -41,6 +42,7 @@ const Question = () => {
   useEffect(() => {
     if (!questions?.length) setQuestions(data?.results);
   }, [data, questions, setQuestions]);
+
   useEffect(() => {
     const decodedQuestions = questions?.map((q) => {
       return {
@@ -67,10 +69,10 @@ const Question = () => {
     setQuestionOptions(answers);
   }, [curQuestion]);
 
-  const saveQuizResult = (data) => {
-    const results = localStorage.getItem('quiz-results') ? JSON.parse(localStorage.getItem('quiz-results')) : [];
+  const saveStorage = (data) => {
+    const results = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
     results.push(data);
-    localStorage.setItem('quiz-results', JSON.stringify(results));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(results));
   };
 
   const handleOptionClick = (e) => {
@@ -97,19 +99,20 @@ const Question = () => {
     } else {
       const endTime = moment();
       const duration = moment.duration(endTime.diff(startTime));
-      setElapsedTime(`${duration.hours().toString().padStart(2, '0')}:${duration.minutes().toString().padStart(2, '0')}:${duration.seconds().toString().padStart(2, '0')}`);
+      const durationStr = `${duration.hours().toString().padStart(2, '0')}:${duration.minutes().toString().padStart(2, '0')}:${duration.seconds().toString().padStart(2, '0')}`;
+      setElapsedTime(durationStr);
       const quizDetails = {
+        ...options,
         answerCount: score,
         wrongCount: decodedQuestions.length - score,
         totalCount: decodedQuestions.length,
         wrongQuestion: wrongQuestion,
-        elapsedTime: elapsedTime,
+        elapsedTime: durationStr,
       };
-      saveQuizResult(quizDetails);
+      saveStorage(quizDetails);
       navigate('/result');
     }
   };
-
   const setColor = (option) => {
     if (!answerSelected) return 'primary';
     if (option === selectedAnswer && option !== answer) return 'error';

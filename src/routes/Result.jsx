@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { elapsedTimeState, questionIndexState, questionsState, scoreState } from '../atoms';
 import styles from '../styles/Result.module.css';
 
@@ -11,19 +11,28 @@ const Result = () => {
   const setQuestionIndex = useSetRecoilState(questionIndexState);
   const [questions, setQuestions] = useRecoilState(questionsState);
   const navigate = useNavigate();
-  const elapsedTime = useRecoilValue(elapsedTimeState);
+  const [elapsedTime, setElapsedTime] = useRecoilState(elapsedTimeState);
 
-  const retest = () => {
+  const resetTest = (questionStatus) => {
     setScore(0);
     setQuestionIndex(0);
+    setElapsedTime('');
+    if (questionStatus) setQuestions([]);
+  };
+
+  const retest = () => {
+    resetTest();
     navigate('/question');
   };
 
   const moveToHome = () => {
-    setScore(0);
-    setQuestionIndex(0);
-    setQuestions([]);
+    resetTest(true);
     navigate('/');
+  };
+
+  const moveToStatistic = () => {
+    resetTest(true);
+    navigate('/statistic');
   };
 
   return (
@@ -58,6 +67,11 @@ const Result = () => {
       <Box mt={3}>
         <Button onClick={moveToHome} fullWidth variant='outlined'>
           홈으로 돌아가기
+        </Button>
+      </Box>
+      <Box mt={3}>
+        <Button onClick={moveToStatistic} fullWidth variant='outlined'>
+          퀴즈 통계
         </Button>
       </Box>
     </Box>
