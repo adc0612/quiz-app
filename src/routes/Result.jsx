@@ -27,7 +27,7 @@ const Result = () => {
   };
 
   return (
-    <Box mt={30}>
+    <Box>
       <Typography variant='h3' fontWeight='bold'>
         퀴즈 종료
       </Typography>

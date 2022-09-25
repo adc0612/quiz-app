@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { elapsedTimeState, optionsState, questionIndexState, questionsState, scoreState } from '../atoms';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
@@ -23,6 +23,7 @@ const Question = () => {
   const [questionIndex, setQuestionIndex] = useRecoilState(questionIndexState);
   const [decodedQuestions, setDecodedQuestions] = useState([]);
   const [questionOptions, setQuestionOptions] = useState([]);
+  const [wrongQuestion, setWrongQuestion] = useState([]);
   const [answerSelected, setAnswerSelected] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [curQuestion, setCurQuestion] = useState(null);
@@ -30,7 +31,7 @@ const Question = () => {
   const [showNextBtn, setShowNextBtn] = useState(false);
   const navigate = useNavigate();
 
-  const setElapsedTime = useSetRecoilState(elapsedTimeState);
+  const [elapsedTime, setElapsedTime] = useRecoilState(elapsedTimeState);
   const [startTime, setStartTime] = useState(null);
 
   useEffect(() => {
@@ -66,11 +67,24 @@ const Question = () => {
     setQuestionOptions(answers);
   }, [curQuestion]);
 
+  const saveQuizResult = (data) => {
+    const results = localStorage.getItem('quiz-results') ? JSON.parse(localStorage.getItem('quiz-results')) : [];
+    results.push(data);
+    localStorage.setItem('quiz-results', JSON.stringify(results));
+  };
+
   const handleOptionClick = (e) => {
     setAnswerSelected(true);
     const userAns = e.target.textContent;
     setSelectedAnswer(userAns);
-    if (userAns === answer) setScore(score + 1);
+    if (userAns === answer) {
+      setScore(score + 1);
+    } else {
+      const obj = { ...decodedQuestions[questionIndex], selected_answer: userAns };
+      const wrongQuestionArr = [...wrongQuestion];
+      wrongQuestionArr.push(obj);
+      setWrongQuestion(wrongQuestionArr);
+    }
     setShowNextBtn(true);
   };
 
@@ -84,6 +98,14 @@ const Question = () => {
       const endTime = moment();
       const duration = moment.duration(endTime.diff(startTime));
       setElapsedTime(`${duration.hours().toString().padStart(2, '0')}:${duration.minutes().toString().padStart(2, '0')}:${duration.seconds().toString().padStart(2, '0')}`);
+      const quizDetails = {
+        answerCount: score,
+        wrongCount: decodedQuestions.length - score,
+        totalCount: decodedQuestions.length,
+        wrongQuestion: wrongQuestion,
+        elapsedTime: elapsedTime,
+      };
+      saveQuizResult(quizDetails);
       navigate('/result');
     }
   };

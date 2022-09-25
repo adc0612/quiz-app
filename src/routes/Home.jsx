@@ -48,8 +48,8 @@ const Home = () => {
 
   return (
     <div>
-      <Typography variant='h2' fontWeight='bold'>
-        Quiz!!
+      <Typography variant='h3' fontWeight='bold'>
+        퀴즈 타임!!
       </Typography>
       <form>
         <DropDown options={data?.trivia_categories} name={'category'} value={options.category} setValue={setOptionsValue} label='카테고리' />
