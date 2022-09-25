@@ -1,12 +1,18 @@
 import { useQuery } from 'react-query';
-import { getCategory } from '../apis';
+import _axios from '../utils/axios-utils';
 
-export const useCategoryData = (onSuccess, onError) => {
-  return useQuery('car-list', getCategory, {
-    onSuccess,
-    onError,
-    select: (data) => {
-      return data.data;
-    },
-  });
+export const getCategory = async () => {
+  const { data } = await _axios.get('/api_category.php');
+  return data;
 };
+export function useCategory() {
+  return useQuery(['category-list'], () => getCategory());
+}
+
+export const getQuestions = async (params) => {
+  const { data } = await _axios.get('/api.php', { params });
+  return data;
+};
+export function useQuestions(params) {
+  return useQuery(['questions-list', params], () => getQuestions(params));
+}

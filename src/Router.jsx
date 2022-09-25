@@ -8,7 +8,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home />} exact />
+        <Route path='/' element={<Home />} />
         <Route path='/question' element={<Question />} />
         <Route path='/result' element={<Result />} />
         <Route path='*' element={<Navigate to='/' replace />} />
