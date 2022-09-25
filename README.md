@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# Quiz-app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+    <img width="33%" src="./src/assets/img/quiz-app.gif">
+</div>
 
-## Available Scripts
+## 주소
 
-In the project directory, you can run:
+- 사이트: https://adc0612-quizapp.netlify.app/
+- 벡엔드 서버: https://opentdb.com/api_config.php
 
-### `yarn start`
+## 기능
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 퀴즈 option 선택 후 퀴즈 풀기 (선택 안 할시 default값으로 퀴즈 실행)
+- 유저가 답 클릭시 정답 / 오답 표시
+- 퀴즈 종료 후 소요시간 및 점수 표시
+- 정답/오답 비율과 퀴즈기록이 있는 통계 제공
+- 오답노트 제공
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 구현 사항
 
-### `yarn test`
+- [x] '퀴즈 풀기' 버튼을 클릭하여 퀴즈 풀기를 시작할 수 있다.
+- [x] 사용자는 문항에 대한 답안을 4개 보기 중에 선택할 수 있다.
+- [x] 사용자는 답안을 선택하면 다음 문항을 볼 수 있다.
+  - [x] 답안 선택 후 다음 문항 버튼을 볼 수 있다.
+  - [x] 답안이 맞았는지 틀렸는지 바로 알 수 있다.
+  - [x] 다음 문항 버튼을 클릭하여 다음 문항으로 이동할 수 있다.
+- [x] 모든 문항을 다 풀면 사용자는 다음과 같은 결과 정보를 볼 수 있다.
+  - [x] 퀴즈를 마칠 때까지 소요된 시간
+  - [x] 정답 개수
+  - [x] 오답 수
+- [x] 정 오답에 대한 비율을 차트로 표기
+- [x] 다시 풀기
+- [x] 오답 노트
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 사용된 기술스택
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- React
+- JavaScript
+- react-router-dom (router 구성)
+- Recoil (상태 관리)
+- MUI (UI 구성)
+- Chart.js (차트 구성)
+- moment (시간 계산)
