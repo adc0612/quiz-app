@@ -9,6 +9,8 @@ import DropDown from '../components/form/DropDown';
 import TextInput from '../components/form/TextInput';
 import { useNavigate } from 'react-router';
 import { useCategory } from '../hooks/query';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+import EventNoteIcon from '@mui/icons-material/EventNote';
 
 const Home = () => {
   const { isLoading, data, isError, error } = useCategory();
@@ -45,6 +47,9 @@ const Home = () => {
     { id: 'boolean', name: 'True/False' },
   ];
 
+  const moveToStatistic = () => navigate('/statistic');
+  const moveToNote = () => navigate('/note');
+
   return (
     <Box>
       <Typography variant='h3' fontWeight='bold'>
@@ -61,6 +66,16 @@ const Home = () => {
           </Button>
         </Box>
       </form>
+      <Box display='flex' justifyContent='space-between' mt={2}>
+        <Button onClick={moveToStatistic}>
+          <AnalyticsIcon style={{ marginRight: '4px' }} />
+          퀴즈 통계
+        </Button>
+        <Button onClick={moveToNote}>
+          <EventNoteIcon style={{ marginRight: '4px' }} />
+          오답 노트
+        </Button>
+      </Box>
     </Box>
   );
 };

@@ -21,7 +21,6 @@ const Statistic = () => {
     let answerCount = 0,
       wrongCount = 0,
       totalCount = 0;
-    console.log(records);
     records?.forEach((obj) => {
       answerCount += Number(obj.answerCount);
       wrongCount += Number(obj.wrongCount);
@@ -55,11 +54,10 @@ const Statistic = () => {
         <>
           <Box display='flex' justifyContent='space-between'>
             <Button onClick={backToHome}>
-              <HomeIcon />
-              홈으로 이동
+              <HomeIcon style={{ marginRight: '4px' }} />홈 이동
             </Button>
             <Button onClick={deleteRecords}>
-              <DeleteIcon />
+              <DeleteIcon style={{ marginRight: '4px' }} />
               기록 삭제
             </Button>
           </Box>
@@ -92,7 +90,7 @@ const Statistic = () => {
           <Typography>퀴즈 결과가 없습니다.</Typography>
           <Box mt={2}>
             <Button onClick={backToHome} variant='contained'>
-              <HomeIcon />
+              <HomeIcon style={{ marginRight: '4px' }} />
               홈으로 돌아가기
             </Button>
           </Box>

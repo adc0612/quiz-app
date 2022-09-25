@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { elapsedTimeState, optionsState, questionIndexState, questionsState, scoreState } from '../atoms';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
@@ -32,7 +32,7 @@ const Question = () => {
   const [showNextBtn, setShowNextBtn] = useState(false);
   const navigate = useNavigate();
 
-  const [elapsedTime, setElapsedTime] = useRecoilState(elapsedTimeState);
+  const setElapsedTime = useSetRecoilState(elapsedTimeState);
   const [startTime, setStartTime] = useState(null);
 
   useEffect(() => {

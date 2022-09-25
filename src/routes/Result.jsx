@@ -1,9 +1,13 @@
 import React from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, Divider, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { elapsedTimeState, questionIndexState, questionsState, scoreState } from '../atoms';
+import HomeIcon from '@mui/icons-material/Home';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import EventNoteIcon from '@mui/icons-material/EventNote';
 import styles from '../styles/Result.module.css';
 
 const Result = () => {
@@ -35,11 +39,17 @@ const Result = () => {
     navigate('/statistic');
   };
 
+  const moveToNote = () => {
+    resetTest(true);
+    navigate('/note');
+  };
+
   return (
     <Box>
-      <Typography variant='h3' fontWeight='bold'>
+      <Typography variant='h4' align='left' mb={1}>
         퀴즈 종료
       </Typography>
+      <Divider />
       <div className={styles.flex_box}>
         <div className={styles.info_box}>
           <p>
@@ -61,17 +71,25 @@ const Result = () => {
       </div>
       <Box mt={3}>
         <Button onClick={retest} fullWidth variant='outlined'>
+          <RestartAltIcon style={{ marginRight: '4px' }} />
           다시 풀기
         </Button>
       </Box>
       <Box mt={3}>
-        <Button onClick={moveToHome} fullWidth variant='outlined'>
-          홈으로 돌아가기
+        <Button onClick={moveToStatistic} fullWidth variant='outlined'>
+          <AnalyticsIcon style={{ marginRight: '4px' }} />
+          퀴즈 통계
         </Button>
       </Box>
       <Box mt={3}>
-        <Button onClick={moveToStatistic} fullWidth variant='outlined'>
-          퀴즈 통계
+        <Button onClick={moveToNote} fullWidth variant='outlined'>
+          <EventNoteIcon style={{ marginRight: '4px' }} />
+          오답 노트
+        </Button>
+      </Box>
+      <Box mt={3}>
+        <Button onClick={moveToHome} fullWidth variant='outlined'>
+          <HomeIcon style={{ marginRight: '4px' }} />홈 이동
         </Button>
       </Box>
     </Box>
