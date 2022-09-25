@@ -2,14 +2,15 @@ import React from 'react';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { questionIndexState, questionsState, scoreState } from '../atoms';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { elapsedTimeState, questionIndexState, questionsState, scoreState } from '../atoms';
 
 const Result = () => {
   const [score, setScore] = useRecoilState(scoreState);
   const setQuestionIndex = useSetRecoilState(questionIndexState);
   const setQuestions = useSetRecoilState(questionsState);
   const navigate = useNavigate();
+  const elapsedTime = useRecoilValue(elapsedTimeState);
 
   const retest = () => {
     setScore(0);
@@ -28,6 +29,9 @@ const Result = () => {
     <Box mt={30}>
       <Typography variant='h3' fontWeight='bold'>
         총 점수 {score}
+      </Typography>
+      <Typography variant='h5' fontWeight='bold'>
+        경과시간 {elapsedTime}
       </Typography>
       <Box mt={5}>
         <Button onClick={retest} fullWidth variant='outlined'>

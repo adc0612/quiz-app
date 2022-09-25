@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { optionsState, questionIndexState, questionsState, scoreState } from '../atoms';
+import moment from 'moment';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { elapsedTimeState, optionsState, questionIndexState, questionsState, scoreState } from '../atoms';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { decode } from 'html-entities';
@@ -28,6 +29,13 @@ const Question = () => {
   const [answer, setAnswer] = useState(null);
   const [showNextBtn, setShowNextBtn] = useState(false);
   const navigate = useNavigate();
+
+  const setElapsedTime = useSetRecoilState(elapsedTimeState);
+  const [startTime, setStartTime] = useState(null);
+
+  useEffect(() => {
+    setStartTime(moment());
+  }, []);
 
   useEffect(() => {
     if (!questions?.length) setQuestions(data?.results);
@@ -73,6 +81,13 @@ const Question = () => {
       setSelectedAnswer(null);
       setQuestionIndex(questionIndex + 1);
     } else {
+      const endTime = moment();
+      const duration = moment.duration(endTime.diff(startTime));
+      // let durationStr = '';
+      // if (duration.hours() > 0) durationStr += `${duration.hours()}시간 `;
+      // if (duration.minutes() > 0) durationStr += `${duration.minutes()}분 `;
+      // durationStr += `${duration.seconds()}초`;
+      setElapsedTime(`${duration.hours().toString().padStart(2, '0')}:${duration.minutes().toString().padStart(2, '0')}:${duration.seconds().toString().padStart(2, '0')}`);
       navigate('/result');
     }
   };

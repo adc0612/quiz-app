@@ -24,3 +24,8 @@ export const questionIndexState = atom({
   key: 'questionIndexState',
   default: 0,
 });
+
+export const elapsedTimeState = atom({
+  key: 'elapsedTimeState',
+  default: '',
+});
